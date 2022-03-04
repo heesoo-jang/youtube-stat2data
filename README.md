@@ -1,12 +1,21 @@
 <!-- ABOUT THE PROJECT -->
 # 📥 youtube-stat2data
-`youtube-stat2data` lets you easily download the list of videos and their metadata
+`youtube-stat2data` lets you easily download the list of videos and their metadata as a csv file
+
+- Example of an output data table (pulled from CNN's Youtube channel)
+
+|     title     | video_id      | video_description     | published_date   | like_count      | favorite_count     | view_count | comment_count |
+| ------------- | ------------- | --------------------- | ---------------- | --------------- | -------------- | -------------- | ------------- |
+| Chinese tennis star denies making sexual assault allegation         | 3dUlbiAojo4        | Chinese tennis star Peng Shuai has denied making sexual assault allegations against a retired Communist Party leader, following ...  | 2021-12-20T14:54:45Z | 1093 | 0 | 82726 | 1343 |
+| How close is the US to civil war? Closer than you think, study says           | 6AS11SbvLmM         | CNN's Michael Holmes talks with Professor Barbara Walter of the University of California San Diego about her work on a task ...  | 2021-12-20T13:14:16Z | 8826 | 0  |51557 | 345
+
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 # Description
 - Interested in downloading a set of metadata from videos of a specific Youtube channel? 
 - `youtube-stat2data` is a simple tool that is solely built for that purpose.
-- With just the channel ID, you can get a full list of meta data including `title`, `published date`, `video_description`, `view_count `, `like_count`, `favorite_count `, and `comment`.
+- With just the channel ID, you can get a full list of meta data including `title`, `published date`, `video_description`, `view_count `, `like_count`, `favorite_count `, and `comment_count`.
 - `youtube-stat2data` uses YouTube Data API (v3) and Youtube Analytics API. 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
