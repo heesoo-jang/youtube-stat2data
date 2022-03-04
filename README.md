@@ -8,6 +8,8 @@
 - `youtube-stat2data` is a simple tool that is solely built for that purpose.
 - With just the channel ID, you can get a full list of meta data including `title`, `published date`, `video_description`, `view_count `, `like_count`, `favorite_count `, and `comment`.
 - `youtube-stat2data` uses YouTube Data API (v3) and Youtube Analytics API. 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 <!-- GETTING STARTED -->
 # Getting Started
