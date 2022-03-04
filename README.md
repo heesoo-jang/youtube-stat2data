@@ -36,6 +36,14 @@ For example, the url link of CNN's Youtube channel is youtube.com/user/CNN in th
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- REFERENCE -->
+# Reference
+
+Interested in using `youtube-stat2data` and citing my GitHub Repository? [This WikiHow page](https://www.wikihow.com/Cite-a-GitHub-Repository#:~:text=Include%20the%20title%20of%20the,repository%2C%20enclosed%20in%20square%20brackets.) shows you how to cite a GitHub Repository. 
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
 <!-- LICENSE -->
 # License
 
