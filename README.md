@@ -20,6 +20,16 @@
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- QnA -->
+# QnA
+1. Why did you iterate the Youtube API request monthly? Can't you just get all the Youtube data at one request?
+- Based on my experience, the Youtube API does not seem to give more than 501 videos at once. So, even though a Youtube channel has more than 10,000 videos uploaded on its channel, one API request will give less than 501 videos at once. I circumvented this issue by putting API requests for each month over the period of time I wanted.
+2. Why do I need 3 API keys to run `youtube-stat2data`?
+- If you're pulling more than 5,000 videos (which I believe would often be the case), you immediately hit the quota limit with one API key. In this situation, the API request would not provide you with all the data you need. Google allows users to create multiple API keys for free, so there's no loss on your side. Using multiple API keys and rotating them helps circumvent the issue of meeting the quota limit right away.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
 <!-- GETTING STARTED -->
 # Getting Started
 To use `youtube-stat2data`, you need to know your Youtube API Key(s) and the channel ID of the Youtube channel you want to get data from.
