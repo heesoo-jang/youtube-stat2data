@@ -72,7 +72,7 @@ video_ids = list(map(lambda x:x['id']['videoId'], data))
 stats = []
 
 for i in range(0, len(video_ids), 40):
-    res = (youtube).videos().list(id=','.join(video_ids[i:i+40]), part='statistics').execute()
+    res = (youtube).videos().list(id=','.join(video_ids[i:i+40]), part='snippet, statistics').execute()
     stats += res['items']
 
 
@@ -95,7 +95,7 @@ video_description = []
 for i in range(0,len_videos):
     title.append((youtube_result[i])['snippet']['title'])
     published_date.append((youtube_result[i])['snippet']['publishedAt'])
-    video_description.append((youtube_result[i])['snippet']['description'])
+    video_description.append((youtube_stats[i])['snippet']['description'])
 
     if "likeCount" in youtube_stats[i]['statistics']:
         like.append(int((youtube_stats[i])['statistics']['likeCount']))
