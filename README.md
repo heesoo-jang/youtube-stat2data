@@ -6,8 +6,9 @@
 
 |     title     | video_id      | video_description     | published_date   | like_count      | favorite_count     | view_count | comment_count |
 | ------------- | ------------- | --------------------- | ---------------- | --------------- | -------------- | -------------- | ------------- |
-| Chinese tennis star denies making sexual assault allegation         | 3dUlbiAojo4        | Chinese tennis star Peng Shuai has denied making sexual assault allegations against a retired Communist Party leader, following ...  | 2021-12-20T14:54:45Z | 1093 | 0 | 82726 | 1343 |
-| How close is the US to civil war? Closer than you think, study says           | 6AS11SbvLmM         | CNN's Michael Holmes talks with Professor Barbara Walter of the University of California San Diego about her work on a task ...  | 2021-12-20T13:14:16Z | 8826 | 0  |51557 | 345
+| Chinese tennis star denies making sexual assault allegation         | 3dUlbiAojo4        | Chinese tennis star Peng Shuai has denied making sexual assault allegations against a retired Communist Party leader, following more than a month of growing concern about her safety and whereabouts that led to the Women's Tennis Association pulling out of China. CNN's Selina Wang has more. #CNN #News  | 2021-12-20T14:54:45Z | 1093 | 0 | 82726 | 1343 |
+| How close is the US to civil war? Closer than you think, study says           | 6AS11SbvLmM         | CNN's Michael Holmes talks with Professor Barbara Walter of the University of California San Diego about her work on a task force that tries to predict where outside the US a civil war is likely to break out. Walter says the two best predictors of whether violence is likely to occur currently exist in the US and have emerged at a "surprisingly fast rate." #CNN #News  | 2021-12-20T13:14:16Z | 8826 | 0  |51557 | 345
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
