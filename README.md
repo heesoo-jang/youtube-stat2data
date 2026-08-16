@@ -1,80 +1,115 @@
-<!-- ABOUT THE PROJECT -->
-# 📥 youtube-stat2data
-`youtube-stat2data` lets you easily download the list of videos and their metadata as a csv file
+# youtube-stat2data
 
-- Example of an output data table (pulled from CNN's Youtube channel)
+`youtube-stat2data` is a small research utility for collecting public video
+metadata from a YouTube channel and exporting the results as a CSV file. It was
+created for computational media research and uses the YouTube Data API v3.
 
-|     title     | video_id      | video_description     | published_date   | like_count      | favorite_count     | view_count | comment_count |
-| ------------- | ------------- | --------------------- | ---------------- | --------------- | -------------- | -------------- | ------------- |
-| Chinese tennis star denies making sexual assault allegation         | 3dUlbiAojo4        | Chinese tennis star Peng Shuai has denied making sexual assault allegations against a retired Communist Party leader, following more than a month of growing concern about her safety and whereabouts that led to the Women's Tennis Association pulling out of China. CNN's Selina Wang has more. #CNN #News  | 2021-12-20T14:54:45Z | 1093 | 0 | 82726 | 1343 |
-| How close is the US to civil war? Closer than you think, study says           | 6AS11SbvLmM         | CNN's Michael Holmes talks with Professor Barbara Walter of the University of California San Diego about her work on a task force that tries to predict where outside the US a civil war is likely to break out. Walter says the two best predictors of whether violence is likely to occur currently exist in the US and have emerged at a "surprisingly fast rate." #CNN #News  | 2021-12-20T13:14:16Z | 8826 | 0  |51557 | 345
+> **Project status:** This repository is a research prototype last developed in
+> 2022. The script is preserved for transparency and reuse, but YouTube API
+> behavior, quotas, and available fields may have changed. Review the current
+> API documentation before using it in a new study.
 
+## Output
 
+The script exports one row per video, with fields for:
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+- title
+- video ID
+- description
+- publication date
+- like count
+- favorite count
+- view count
+- comment count
 
-# Description
-- Interested in downloading a set of metadata from videos of a specific Youtube channel? 
-- `youtube-stat2data` is a simple tool that is solely built for that purpose.
-- With just the channel ID, you can get a full list of meta data including `title`, `published date`, `video_description`, `view_count `, `like_count`, `favorite_count `, and `comment_count`.
-- `youtube-stat2data` uses YouTube Data API (v3) and Youtube Analytics API. 
-<p align="right">(<a href="#top">back to top</a>)</p>
+Some statistics may be unavailable because of video settings or API changes.
 
+## Requirements
 
-<!-- QnA -->
-# QnA
-1. Why did you iterate the Youtube API request monthly? Can't you just get all the Youtube data at one request?
-- Based on my experience, the Youtube API does not seem to give more than 501 videos at once. So, even though a Youtube channel has more than 10,000 videos uploaded on its channel, one API request will give less than 501 videos at once. I circumvented this issue by putting API requests for each month over the period of time I wanted.
-2. Why do I need 3 API keys to run `youtube-stat2data`?
-- If you're pulling more than 5,000 videos (which I believe would often be the case), you immediately hit the quota limit with one API key. In this situation, the API request would not provide you with all the data you need. Google allows users to create multiple API keys for free, so there's no loss on your side. Using multiple API keys and rotating them helps circumvent the issue of meeting the quota limit right away.
+- Python 3
+- `pandas`
+- `google-api-python-client`
+- a Google Cloud project with the YouTube Data API v3 enabled
+- one or more YouTube API keys
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+Install the Python dependencies with:
 
+```bash
+python -m pip install pandas google-api-python-client
+```
 
-<!-- GETTING STARTED -->
-# Getting Started
-To use `youtube-stat2data`, you need to know your Youtube API Key(s) and the channel ID of the Youtube channel you want to get data from.
+## Setup
 
-## How to get Youtube_API_Key(s)
-- Go to [Google Cloud Platform](https://console.cloud.google.com/apis/credentials?project=omega-booster-261021) and click on create credentials icon to receive an API key. You will have to create at least three credentials if you're pulling data from more than 5,000 videos.
-- Then, go to [API library](https://console.cloud.google.com/apis/library?project=omega-booster-261021) to enable the two API libraries you need for pulling Youtube data: [YouTube Data API (v3)](https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=omega-booster-261021) and [Youtube Analytics API](https://console.cloud.google.com/apis/library/youtubeanalytics.googleapis.com?project=omega-booster-261021). 
+1. In the [Google Cloud console](https://console.cloud.google.com/), create or
+   select a project.
+2. Enable the
+   [YouTube Data API v3](https://console.cloud.google.com/apis/library/youtube.googleapis.com).
+3. Create an API key and restrict it to the APIs and environments needed for
+   your project.
+4. Open `youtube-stat2data-for-public.py` and replace the example placeholders
+   in `DEVELOPER_KEY`, `channel_id`, and the list of years.
 
+Never commit API keys to GitHub. For new or shared research code, prefer loading
+credentials from environment variables or another secret-management system.
 
-## How to get the channel ID
-`channel_id` you would use to pull the metadata is different from the name of the channel. 
+## Finding a channel ID
 
-1. If you go to the homescreen of a Youtube channel, the URL link will include the name of the channel.
-For example, the url link of CNN's Youtube channel is youtube.com/user/CNN in the following screenshot.
-![screenshot1](github-youtube-screenshots/Slide1.jpeg)
+A channel ID is not always the same as the channel name shown in a YouTube URL.
+Open a video from the channel, select the channel name, and inspect the channel
+page URL. In a URL such as:
 
-2. Click on one of the videos of the youtube channel. The new URL link is for that specific video (the red box). Click on the name of the channel below the video, which is the one directed by the red arrow in the image below.
-![screenshot1](github-youtube-screenshots/Slide2.jpeg)
+```text
+https://www.youtube.com/channel/UCupvZG-5ko_eiXAupbDfxWw
+```
 
-3. You are now back on the homescreen of the Youtube channel again, but you get a different URL. The last part of this URL is the channel ID. For example, the new URL link for CNN's Youtube channel is https://www.youtube.com/channel/UCupvZG-5ko_eiXAupbDfxWw (see image below). The channel ID for CNN's Youtube channel is  `"UCupvZG-5ko_eiXAupbDfxWw"`.
-![screenshot1](github-youtube-screenshots/Slide3.jpeg)
+the final segment is the channel ID. The screenshots below illustrate the
+workflow used when this project was created:
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+1. Open the channel page.
 
+   ![A YouTube channel page](github-youtube-screenshots/Slide1.jpeg)
 
-<!-- REFERENCE -->
-# Reference
+2. Open a video and select its channel name.
 
-Interested in using `youtube-stat2data` and citing my GitHub Repository? [This WikiHow page](https://www.wikihow.com/Cite-a-GitHub-Repository#:~:text=Include%20the%20title%20of%20the,repository%2C%20enclosed%20in%20square%20brackets.) shows you how to cite a GitHub Repository. 
+   ![Selecting the channel from a video page](github-youtube-screenshots/Slide2.jpeg)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+3. Read the channel ID from the resulting URL.
 
+   ![A channel ID in a YouTube URL](github-youtube-screenshots/Slide3.jpeg)
 
-<!-- LICENSE -->
-# License
+## How collection works
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+The script queries the channel one month at a time for the requested years,
+follows paginated search results, retrieves video statistics in batches, and
+writes the combined table to `youtube-data.csv`.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+For large collections, consult Google's current quota documentation. Multiple
+API keys should only be used in accordance with Google Cloud and YouTube API
+policies; do not use key rotation to evade quota or usage restrictions.
 
+## Research-use notes
 
-<!-- CONTACT -->
-# Contact
+- Record the collection date, channel ID, requested date range, query settings,
+  and software version in your research documentation.
+- Treat counts as time-dependent observations rather than permanent facts.
+- Check applicable platform terms, institutional requirements, and research
+  ethics obligations before collecting, storing, or sharing data.
+- Do not commit downloaded datasets if they contain restricted, sensitive, or
+  unpublished research material.
 
-Heesoo Jang - [@HeesooJang2](https://twitter.com/HeesooJang2)
+## Limitations
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+- Search results and metadata availability are controlled by the YouTube API.
+- Deleted, private, unlisted, region-restricted, or otherwise unavailable videos
+  may be absent.
+- Metrics can change after collection.
+- The current script is configured by editing placeholders in the source file;
+  it does not yet provide a command-line interface or automated tests.
+
+## License
+
+Distributed under the [MIT License](LICENSE).
+
+## Author
+
+Heesoo Jang — [website](https://heesoojang.com/)
